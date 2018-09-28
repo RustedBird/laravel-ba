@@ -4,11 +4,12 @@
 
 @section('header')
     @parent
-@show
+@endsection
+
 
 @section('nav-bar')
     @parent
-@show
+@endsection
 
 @section('content')
     @include('includes.content')
