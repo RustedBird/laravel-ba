@@ -14,4 +14,3 @@
 @section('content')
     @include('includes.content')
 @endsection
-

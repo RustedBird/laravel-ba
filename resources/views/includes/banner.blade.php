@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                @if ($k !== 0 && $k % 2)
+                @if (($k !== 0 && $k % 2) || $item === end($data))
             </div>
         @endif
 
