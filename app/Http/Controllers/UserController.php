@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
-use App\Project as MyProject;
 
-class ProjectController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-//        $result = DB::table('projects')->whereBetween('id', [1, 3])->orderByDesc('id')->get();
-        $result = DB::table('projects')->where('id', 3)->update(['name'=>'newName']);
-        $result = DB::table('projects')->where('id', 1)->delete();
-//        $result = MyProject::all()->latest();
-        dd($result);
+       $users = DB::table('users')->get();
+
+       return view('user')->with('users', $users);
     }
 
     /**
@@ -30,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('user_form')->with('user');
     }
 
     /**
@@ -41,7 +37,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('users')->insert([
+            [
+                'image' => rand(1, 5) . '.jpg',
+                'name' => $request->name,
+                'date' => date("Y/m/d"),
+                'role' => $request->role,
+                'status' => $request->status
+            ]
+        ]);
+        return redirect()->route('users.index');
     }
 
     /**
@@ -52,7 +57,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $user = DB::table('users')->where('id', $id)->first();
+
+        return view('single_user_page')->with('user', $user);
     }
 
     /**
@@ -63,7 +71,8 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = DB::table('users')->where('id', $id)->first();
+        return view('user_form')->with('user', $user);
     }
 
     /**
@@ -73,9 +82,18 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        DB::table('users')->where('id', $request->id)->update(
+            [
+                'image' => $request->image,
+                'name' => $request->name,
+                'role' => $request->role,
+                'status' => $request->status
+            ]
+        );
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -84,8 +102,12 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+
+        $id = $request->id;
+
+        DB::table('users')->where('id', $id)->delete();
+        return redirect()->route('users.index');
     }
 }

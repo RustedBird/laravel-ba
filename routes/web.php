@@ -46,3 +46,5 @@ Route::get('/posts', function () {
 Route::match(['get', 'post'], '/contact', ['as' => 'contact', 'uses' => 'ContactController@index']);
 
 Route::resource('projects', 'ProjectController');
+
+Route::resource('users', 'UserController');
