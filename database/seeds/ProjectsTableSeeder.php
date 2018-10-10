@@ -12,38 +12,11 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        /*DB::table('projects')->insert([
-            [
-                'name' => 'project1',
-                'code' => '1',
-                'description' => str_random(15),
-                'image' => 'pic1.jpg',
-                'active' => true,
-                'view_count' => 0
-            ],
-            [
-                'name' => 'project2',
-                'code' => '27',
-                'description' => str_random(15),
-                'image' => 'pic2.jpg',
-                'active' => true,
-                'view_count' => 0
-            ],
-            [
-                'name' => 'project3',
-                'code' => '2',
-                'description' => str_random(15),
-                'image' => 'pic3.jpg',
-                'active' => false,
-                'view_count' => 0
-            ]
-        ]);*/
 
-        Project::create(
+        $projects = [
             [
                 'name' => 'project1',
                 'code' => '1',
-                'description' => str_random(15),
                 'image' => 'pic1.jpg',
                 'active' => true,
                 'view_count' => 0
@@ -51,7 +24,6 @@ class ProjectsTableSeeder extends Seeder
             [
                 'name' => 'project2',
                 'code' => '27',
-                'description' => str_random(15),
                 'image' => 'pic2.jpg',
                 'active' => true,
                 'view_count' => 0
@@ -59,11 +31,30 @@ class ProjectsTableSeeder extends Seeder
             [
                 'name' => 'project3',
                 'code' => '2',
-                'description' => str_random(15),
+                'image' => 'pic3.jpg',
+                'active' => false,
+                'view_count' => 0
+            ],
+            [
+                'name' => 'project3',
+                'code' => '2',
+                'image' => 'pic3.jpg',
+                'active' => false,
+                'view_count' => 0
+            ],
+            [
+                'name' => 'project3',
+                'code' => '2',
                 'image' => 'pic3.jpg',
                 'active' => false,
                 'view_count' => 0
             ]
-        );
+        ];
+
+
+        foreach ($projects as $project)
+        {
+            Project::create($project);
+        }
     }
 }

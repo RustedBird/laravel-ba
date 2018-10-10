@@ -21,7 +21,7 @@
                 <td><a href="/users/{{ $user->id }}"><img src="/img/avatar/{{ $user->image }}" class="avatar" alt="Avatar">{{ $user->name }}
                     </a></td>
                 <td>{{ $user->date }}</td>
-                <td>Admin</td>
+                <td>{{ $user->roles->first()['role'] }}</td>
                 <td><span class="status {{ $user->status }}">&bull;</span>{{ $user->status }}</td>
                 <td>
                     <a href="/users/{{ $user->id }}/edit" data-method="get" class="button settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class UserController extends Controller
 {
@@ -14,7 +15,14 @@ class UserController extends Controller
      */
     public function index()
     {
-       $users = DB::table('users')->get();
+       $users = User::all();
+       $users->load('roles');
+
+       $users = User::whereHas('roles', function ($query) {
+           $query->where('role', 'Admin');
+       })->with('roles')->get();
+
+       dd($users);
 
        return view('user')->with('users', $users);
     }
@@ -57,8 +65,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-
-        $user = DB::table('users')->where('id', $id)->first();
+        
+        $user = DB::table('users')->find($id);
 
         return view('single_user_page')->with('user', $user);
     }
@@ -104,7 +112,6 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-
         $id = $request->id;
 
         DB::table('users')->where('id', $id)->delete();

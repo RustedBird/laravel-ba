@@ -14,7 +14,7 @@
                 </div>
             @endif
             <div class="form-group">
-                <input type="name" name="name" placeholder="Name" required value="{{ (!empty($user->name) ? $user->name : '') }}">
+                <input type="text" name="name" placeholder="Name" required value="{{ (!empty($user->name) ? $user->name : '') }}">
             </div>
             <div class="form-group">
                 <input type="text" name="role" placeholder="Role" required value="{{ (!empty($user->role) ? $user->role : '') }}">
@@ -32,5 +32,5 @@
             </div>
         </form>
     </div>
-    <a href="/users"><h3>Go back</h3></a>
+    <a href="{{ route('users.index') }}"><h3>Go back</h3></a>
 @endsection

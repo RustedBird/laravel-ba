@@ -17,11 +17,11 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('code');
-            $table->text('description');
             $table->string('image');
             $table->boolean('active');
             $table->integer('view_count');
             $table->timestamps();
+
         });
     }
 
